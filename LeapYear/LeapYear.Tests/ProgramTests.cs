@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using System.IO;
 
 namespace LeapYear.Tests
 {
@@ -40,6 +41,38 @@ namespace LeapYear.Tests
             bool output = program.isLeapYear(400);
 
             Assert.Equal(true, output);
+        }
+
+        [Fact]
+         public void main_enters_leap_year_retruns_yay(){        
+            // Arrange
+            var reader = new StringReader("444");
+            Console.SetIn(reader);
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            // Act
+            Program.Main(new string[0]);
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Equal("yay", output);
+        }
+
+        [Fact]
+         public void main_enters_normal_year_retruns_nay(){
+           // Arrange
+            var reader = new StringReader("443");
+            Console.SetIn(reader);
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            // Act
+            Program.Main(new string[0]);
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Equal("nay", output);
         }
     }
 }

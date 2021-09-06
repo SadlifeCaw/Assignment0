@@ -43,10 +43,10 @@ namespace LeapYear.Tests
             Assert.Equal(true, output);
         }
 
-        [Fact]
+    [Fact]
          public void main_enters_leap_year_retruns_yay(){        
             // Arrange
-            var reader = new StringReader("444");
+            var reader = new StringReader("1644");
             Console.SetIn(reader);
             var writer = new StringWriter();
             Console.SetOut(writer);
@@ -62,7 +62,7 @@ namespace LeapYear.Tests
         [Fact]
          public void main_enters_normal_year_retruns_nay(){
            // Arrange
-            var reader = new StringReader("443");
+            var reader = new StringReader("1643");
             Console.SetIn(reader);
             var writer = new StringWriter();
             Console.SetOut(writer);
@@ -73,6 +73,33 @@ namespace LeapYear.Tests
 
             // Assert
             Assert.Equal("nay", output);
+        }
+
+        [Fact]
+        public void vailidInput_year_before_1582(){
+            Program program = new Program();
+
+            bool output = program.validInput("100");
+
+            Assert.Equal(false, output);
+        }
+
+        [Fact]
+        public void vailidInput_year_after_1582(){
+            Program program = new Program();
+
+            bool output = program.validInput("1858");
+
+            Assert.Equal(true, output);
+        }
+
+        [Fact]
+        public void vailidInput_text_input(){
+            Program program = new Program();
+
+            bool output = program.validInput("dkfldsfjflk");
+
+            Assert.Equal(false, output);
         }
     }
 }

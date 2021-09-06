@@ -8,13 +8,31 @@ namespace LeapYear
         public static void Main(string[] args)
         {
            string input = Console.ReadLine();
-           int year = Int32.Parse(input);
            Program program = new Program();
-           if(program.isLeapYear(year) == true){
+           if(program.validInput(input)){
+               int year = Int32.Parse(input);
+               if(program.isLeapYear(year) == true){
                Console.WriteLine("yay");
-           } else {
+               } else {
                Console.WriteLine("nay");
+               }
+           } else {
+               Console.WriteLine("Invalid Input - It is only vilid to insert a number from 1582 on so on");
            }
+           
+        }
+
+        public bool validInput(String input){
+            try{
+                int val = Int32.Parse(input);
+                if(val < 1581){
+                return false;
+                } else {
+                return true;
+                }
+            } catch (Exception e){
+                return false;
+            }
         }
 
         public bool isLeapYear(int year){
